@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>vue</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div id="app">
+        <h1>Ticket Booking App</h1>
+        <div class="ticket-app">
+            <div class="ticket-app_top">
+                <div v-for="(value,key)" class="seat-state">
+                    <div class="seat-state" v-for="(value, key) in seatStates">
+                        <div class="seat-state__color" :style="{backgroundColor: value.color}"></div>
+                        <div class="seat-state__text">{{ value.text }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="ticket-app__bottom">
+                <div class="ticket-app__left">
+                    <div class="bus">
+                        <div class="bus__top">
+                            <div class="bus__door">Door</div>
+                            <div class="bus__driver">Driver</div>
+                        </div>
+                        <div class="seats">
+                            <div class="seat" :class="{
+                                'seat--sold': seat.type === 'sold',
+                                'seat--booked': seat.type === 'booked',
+                                'seat--selected': seat.type === 'selected'
+                                }" v-for="(seat, i) in seats" :key="seat.name"
+                                @click="handleClic(i)">
+                            {{seat.name}}
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ticket-app_right"></div>
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>
