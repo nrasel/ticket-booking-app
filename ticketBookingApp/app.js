@@ -146,7 +146,10 @@ createApp({
     }
   },
   computed:{
-
+    selectedSeats(){
+      let sc=this.seats.filter(item=>item.type === 'selected');
+      return sc;
+    }
   },
   methods: {
    handleClic(i){
@@ -155,8 +158,14 @@ createApp({
       alert("You can not select this seat")
       return
     }
-    console.log(clickedSeat)
-    clickedSeat.type= clickedSeat.type=== "selected"?"available":'selected';
+
+    if(this.selectedSeats.length>2){
+      alert("Your can not select more than select three seats")
+      return;
+    }
+
+
+    clickedSeat.type = clickedSeat.type=== "selected"?"available":'selected';
    }
   },
   watch:{
