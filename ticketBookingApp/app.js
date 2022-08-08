@@ -3,6 +3,7 @@ const { createApp } = Vue;
 createApp({
   data() {
     return {
+      confirmed:false,
       name:'',
       mobile:'',
       appliedCoupon: null,
@@ -185,7 +186,7 @@ createApp({
         return;
       }
 
-      if (this.selectedSeats.length > 2) {
+      if (clickedSeat.type==='available' && this.selectedSeats.length > 2) {
         alert("Your can not select more than select three seats");
         return;
       }
@@ -193,6 +194,27 @@ createApp({
       clickedSeat.type =
         clickedSeat.type === "selected" ? "available" : "selected";
     },
+
+    confirm() {
+      if (!this.name || !this.mobile) {
+        alert("Please enter name and mobile");
+        return;
+      }
+    
+      this.confirmed = true;
+    },
+    resetData() {
+      this.confirmed = false;
+      this.name = "";
+      this.mobile = "";
+      this.appliedCoupon = null;
+    
+      this.seats.forEach((seat) => {
+        if (seat.type === "selected") {
+          seat.type = "sold";
+        }
+      });
+    }
   },
   watch: {
     couponCode(newValue) {
